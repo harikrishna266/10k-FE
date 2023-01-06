@@ -1,0 +1,59 @@
+.form-field {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+
+
+
+	label {
+		margin: 12px 2px 4px 1px;
+		text-align: left;
+		font-size: 12px;
+	}
+
+	input {
+		flex: 1;
+		border: 0px;
+		height: 38px;
+		border-radius: 5px;
+		color: var(--text-color);
+		background: var(--input-bg);
+		border: 1px solid var(--input-border);
+		padding: 10px 10px;
+		width: 100%;
+
+
+
+
+
+	}
+
+	button {
+		border: 0px;
+		background: var(--buton-bg);
+		color: var(--buton-color);
+		padding: 12px;
+		margin-top: 10px;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: all 0.5s ease;
+		&:disabled {
+			opacity: .3;
+		}
+	}
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:focus {
+		transition: background-color 600000s 0s, color 600000s 0s;
+	}
+}
+
+
+
+.error {
+	font-size: .8rem;
+	color: var(--error);
+	padding: 3px 0px 0px 0px;
+	margin: 0px;
+
+}

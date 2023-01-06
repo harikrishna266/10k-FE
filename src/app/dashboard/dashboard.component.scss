@@ -1,0 +1,61 @@
+@use "theme" as theme;
+
+:host {
+	display: block;
+	height: 100%;
+}
+
+.dash {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	height: 100%;
+	display: flex;
+
+	&__header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		&__search {
+			display: flex;
+			flex-direction: column;
+			margin: 0 20px;
+			box-sizing: border-box;
+			height: 35px;
+
+			&____input {
+				height: 100px
+			}
+		}
+	}
+
+	&__add {
+		background: none;
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		padding: 4px 21px;
+		line-height: 6px;
+		height: 26px;
+		margin: 9px 13px 0px 0px;
+		cursor: pointer;
+	}
+
+	&__title {
+		height: 50px;
+		flex: 1;
+		text-align: left;
+	}
+
+	&__photos {
+		flex: 1;
+		overflow: auto;
+	}
+
+	&__load-more {
+		margin: 0px auto;
+		height: 30px;
+	}
+
+}

@@ -1,0 +1,27 @@
+.alert {
+	min-width: 400px;
+	width: auto;
+	height: auto;
+	background: var(--background-color);
+	display: flex;
+	flex-direction: column;
+
+	h4 {
+		text-align: center;
+	}
+
+	ul {
+		margin: 20px 0px;
+
+		li {
+			text-align: center;
+		}
+	}
+
+	&__buttons {
+		justify-content: center;
+		display: flex;
+		flex-direction: row;
+
+	}
+}

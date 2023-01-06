@@ -1,0 +1,9 @@
+<div class="alert">
+	<h4>{{alert.title}}</h4>
+	<ul>
+		<li *ngFor="let message of messages"> {{message.message }}</li>
+	</ul>
+	<div class="alert__buttons">
+		<button class="button  small" (click)="close()">Ok</button>
+	</div>
+</div>

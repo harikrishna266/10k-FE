@@ -1,0 +1,40 @@
+@use "theme" as theme;
+
+:host {
+	display: block;
+	height: 100%;
+}
+
+.main {
+	flex: 1;
+	overflow: auto;
+}
+
+.page {
+	margin: 0 auto;
+	display: flex;
+	gap: 10px;
+	height: 100%;
+	flex-direction: column-reverse;
+	width: min(100% - 20px, 1400px);
+
+	@include theme.breakpoint('large') {
+		flex-direction: row;
+	}
+
+	&__main {
+		padding: 10px;
+		flex: 1;
+		background: var(--box-color);
+		overflow: auto;
+	}
+
+	&__aside {
+		width: 100%;
+		background: var(--box-color);
+		@include theme.breakpoint('large') {
+			width: 300px;
+		}
+	}
+
+}

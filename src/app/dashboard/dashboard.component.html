@@ -1,0 +1,21 @@
+<div class="dash">
+	<div class="dash__header">
+		<h1 class="dash__title">Photos</h1>
+		<div class="form-field dash__header__search">
+			<input [(ngModel)]="queryParams.search" (ngModelChange)="updateUrlParams()"
+				   class="dash__header__search__input" type="text" placeholder="Search">
+		</div>
+		<button class="dash__add" (click)="openUpload()">+ ADD</button>
+	</div>
+	<ttc-progress-bar *ngIf="loader"></ttc-progress-bar>
+	<div class="dash__photos">
+		<ttc-photo-card class="photo small" [image]="image"
+						*ngFor="let image of this.image$| async "></ttc-photo-card>
+	</div>
+
+	<div class="pagination">
+		<div class="pagination__page"
+			 [ngClass]="{'pagination__page--selected': ((page -1) * queryParams.limit) == queryParams.skip  }"
+			 (click)="goToPage(page)" *ngFor="let page of paginationArray">{{page}}</div>
+	</div>
+</div>

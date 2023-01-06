@@ -1,0 +1,10 @@
+<div class="error-block">
+	<ng-container *ngIf="formEle && formEle.dirty">
+		<p class="error" *ngIf="!formEle.valid  && formEle.hasError('required')">This field is required</p>
+		<p class="error" *ngIf="formEle.hasError('minlength') || formEle.hasError('maxlength')">Requires min of 6 and
+			max of 10 characters </p>
+		<p class="error" *ngIf="!formEle.valid  && formEle.hasError('email')">Please enter a valid Email</p>
+		<p class="error" *ngIf="!formEle.valid  && formEle.hasError('passwordMismatch')">Passwords does not match</p>
+	</ng-container>
+</div>
+

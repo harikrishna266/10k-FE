@@ -1,0 +1,36 @@
+@forward "utils/breakpoints";
+@forward "utils/functions";
+@forward "utils/font";
+@forward "globals";
+
+
+
+
+.dash__photos {
+	flex: 1;
+	overflow: auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 200px);
+	grid-auto-rows: 10px;
+	justify-content: space-evenly;
+	position: relative;
+
+
+	.photo {
+		border-radius: 16px;
+		margin: 10px 5px;
+
+		&.small {
+			grid-row-end: span 20;
+		}
+
+		&.medium{
+			grid-row-end: span 25;
+		}
+
+
+		&.large{
+			grid-row-end: span 30;
+		}
+	}
+}

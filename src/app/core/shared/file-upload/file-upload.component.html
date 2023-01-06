@@ -1,0 +1,12 @@
+<div class="uploader">
+	<div class="uploader__close" (click)="close()">X</div>
+	<div class="uploader__drop-area" appDrag (files)="dropFiles($event)">
+		<h4 class="uploader__drop-text">Drop your Image Here</h4>
+		<p>Or</p>
+		<input style="display: none" type="file" [attr.accept]="allowed" multiple="true" #file
+			   (change)="fileSelected($event)">
+		<button class="uploader__click-text" (click)="file.click()">Click Here to Browse</button>
+		<span class="uploader__allowed_formats">*jpeg, png, gif, jpg</span>
+	</div>
+	<ttc-file-upload-progress-bar [file]="file" *ngFor="let file of files"></ttc-file-upload-progress-bar>
+</div>

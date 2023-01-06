@@ -1,0 +1,47 @@
+<div class="login">
+	<div class="login__form">
+		<ttc-progress-bar *ngIf="apiInProgress"></ttc-progress-bar>
+		<h3>Register</h3>
+
+		<form [formGroup]="form"  (ngSubmit)="submit()" >
+
+
+			<!-----------Username---------- -->
+			<div class="form-field">
+				<label>Name </label>
+				<input formControlName="name" type="text">
+				<ttc-error [formEle]="getFormControl('name')"></ttc-error>
+			</div>
+
+			<!-----------email---------- -->
+			<div class="form-field">
+				<label>Email </label>
+				<input formControlName="email" type="text">
+				<ttc-error [formEle]="getFormControl('email')"></ttc-error>
+			</div>
+
+
+			<!-----------password---------- -->
+			<div class="form-field">
+				<label>Password </label>
+				<input formControlName="password" type="password">
+				<ttc-error [formEle]="getFormControl('password')"></ttc-error>
+			</div>
+
+
+			<!-----------confirm password---------- -->
+			<div class="form-field">
+				<label>Confirm password </label>
+				<input formControlName="confirm_password" type="password">
+				<ttc-error [formEle]="getFormControl('confirm_password')"></ttc-error>
+			</div>
+
+
+			<div class="form-field">
+				<button type="submit" class="register__button"  [disabled]="!form.valid" >Register</button>
+			</div>
+			<a class="link" routerLink="/login">Click  Here to login</a>
+
+		</form>
+	</div>
+</div>

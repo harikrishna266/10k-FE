@@ -1,0 +1,33 @@
+@use './functions' as theme;
+// mobile- 700 - small
+//tablet - 900 - medium
+//small monitor - 900px - 1440px - large
+//large screen 1440px -x-large
+
+
+$breakpoints-up: (
+	"medium" : theme.em(700),
+	"large" : theme.em(900),
+	"xlarge" : theme.em(1440),
+);
+
+// .down break points are .02 less than the original break points
+$breakpoints-down: (
+	"medium" : theme.em(699.98),
+	"large" : theme.em(899.98),
+	"xlarge" : theme.em(1439.98),
+);
+
+
+@mixin breakpoint($size) {
+	@media (min-width: map-get($breakpoints-up, $size)){
+		@content;
+	}
+}
+
+@mixin breakpoint-down($size) {
+	@media (max-width: map-get($breakpoints-up, $size)){
+		@content;
+	}
+}
+

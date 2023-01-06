@@ -1,0 +1,24 @@
+.button {
+	background: var(--buton-bg);
+	color: var(--text-color);
+	border: 0px;
+
+
+	&.small {
+		font-size: .9em;
+		padding: 7px 11px;
+		margin: 2px;
+	}
+}
+
+
+.link {
+	padding: 26px 0px 0px 0px;
+	cursor: pointer;
+	font-size: 0.9em;
+	color: var(--text-color);
+	display: block;
+	opacity: .8;
+	text-decoration: none;
+	text-align: center;
+}
