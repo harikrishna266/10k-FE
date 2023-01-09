@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
 	apiInProgress = false;
 	form!: FormGroup;
-	errors!:string;
+	errors!: string;
 
 	constructor(
 		public fb: FormBuilder,
@@ -64,13 +64,13 @@ export class RegisterComponent implements OnInit {
 	}
 
 	finishedRegistration() {
-		//this.apiInProgress = false;
+		this.apiInProgress = false;
 		this.router.navigate(['/login']);
 	}
 
-	registrationError(error: HttpErrorResponse) {
-		// this.apiInProgress = false;
-		this.errors = error.message;
+	registrationError(error: any) {
+		this.apiInProgress = false;
+		throw new HttpErrorResponse(error);
 	}
 
 }

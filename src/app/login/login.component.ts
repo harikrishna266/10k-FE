@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../core/services/user.service";
-import {User} from "../types/user.type";
 import {StoreService} from "../core/services/store.service";
+import {MatDialog} from "@angular/material/dialog";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
 	selector: 'tck-login',
@@ -16,13 +17,16 @@ export class LoginComponent implements OnInit {
 	form!: FormGroup;
 	token: any = '';
 	errors!: string;
+	show = false;
 
 	constructor(
 		public fb: FormBuilder,
 		public userSer: UserService,
 		private router: Router,
 		public storeSer: StoreService,
-	) {}
+		public dialog: MatDialog
+	) {
+	}
 
 	ngOnInit() {
 		this.createForm();
@@ -41,26 +45,27 @@ export class LoginComponent implements OnInit {
 
 	submit(): void {
 		this.apiInProgress = true;
-		if(!this.form.valid) {
+		if (!this.form.valid) {
 			return;
 		}
-		this.userSer.login(this.form.value).subscribe(
-			(login: User) => this.validLogin(login),
-			(e) => this.showErrorMessage(e)
-		);
+		this.userSer.login(this.form.value)
+			.subscribe(
+				(login: loginResponse) => this.validLogin(login),
+				(e) => this.loginError(e)
+			);
 	}
 
-	validLogin(user: User): void {
+	validLogin(user: loginResponse): void {
 		this.apiInProgress = false;
 		this.storeSer.token = user.accessToken as string;
 		this.storeSer.refreshToken = user.refreshToken as string;
 		this.router.navigate(['/']);
 	}
 
-
-	showErrorMessage(error: string) {
-		this.errors = error;
+	loginError(e: any) {
+		this.apiInProgress = false;
+		throw new HttpErrorResponse(e);
 	}
 }
 
-export type loginResponse = { token: string, refreshToken: string };
+export type loginResponse = { accessToken: string, refreshToken: string };

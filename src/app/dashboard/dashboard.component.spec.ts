@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from "@angular/core/testing";
 import {CommonModule} from "@angular/common";
 import {SharedModule} from "../core/shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 import {ServicesModule} from "../core/services/services.module";
 import {UserService} from "../core/services/user.service";
 import {DashboardComponent, Queryparams} from "./dashboard.component";

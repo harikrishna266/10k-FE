@@ -31,6 +31,10 @@ export class DashboardComponent implements AfterViewInit {
 		this.watchUrlParams();
 	}
 
+	resetParams() {
+		return {skip: 0, limit: 30, search: '', id: new Date().getTime()}
+	}
+
 	watchUrlParams() {
 		this.image$ = this.route.queryParams
 			.pipe(
@@ -63,6 +67,8 @@ export class DashboardComponent implements AfterViewInit {
 			height: 'auto',
 			panelClass: 'ttc-modal-box'
 		}).afterClosed().subscribe(res => {
+			this.updateParams(this.resetParams());
+			this.updateUrlParams();
 		})
 	}
 
@@ -76,6 +82,7 @@ export class DashboardComponent implements AfterViewInit {
 				map((e: ImageApi) => e.images)
 			)
 	}
+
 
 	updatePagination(count: any) {
 		this.totalImages = count[0] ? count[0].count : 0

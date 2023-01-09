@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {UserService} from "./user.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
@@ -8,6 +8,7 @@ import {ImageService} from "./image.service";
 import {JwtInterceptor} from "../interceptor/jwtInterceptor";
 import {MaterialModule} from "../material.module";
 import {RetryInterceptor} from "../interceptor/retry-interceptor";
+import {GlobalErrorHandlerService} from "./global-error-handler.service";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {RetryInterceptor} from "../interceptor/retry-interceptor";
 		StoreService,
 		ThemeService,
 		ImageService,
+		{ provide: ErrorHandler, useClass: GlobalErrorHandlerService},
 		{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
 		{provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true}
 	]
