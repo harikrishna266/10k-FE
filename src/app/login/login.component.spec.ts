@@ -11,8 +11,8 @@ import {By} from "@angular/platform-browser";
 import {of, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {environment} from "../../environments/environment";
 
 const setFormValid = (form: FormGroup) => {
 	form.patchValue(validLoginCred)
@@ -34,12 +34,6 @@ let setFieldInvalid = (field: string, value = "", form: FormGroup): FormControl 
 	formElem.updateValueAndValidity();
 	form.updateValueAndValidity();
 	return formElem;
-}
-let mockRouter = {
-	navigate: jest.fn(),
-	routerState: {
-		root: ''
-	}
 }
 
 
@@ -219,10 +213,13 @@ describe('Login form [LoginComponent]', () => {
 		describe('4XX Response', () => {
 			let showErrorMessage: any;
 			let validLogin: any;
+			let throwErrorcall: any;
 			beforeEach(() => {
 				loginApi = jest.spyOn(userSer, 'login').mockReturnValue(throwError(error));
-				showErrorMessage = jest.spyOn(component, 'showErrorMessage');
+				showErrorMessage = jest.spyOn(component, 'loginError');
 				validLogin = jest.spyOn(component, 'validLogin');
+				throwErrorcall = jest.spyOn(component, 'throwError').mockImplementation(() => {});
+
 				component.ngOnInit();
 				form = component.form;
 			});
@@ -252,9 +249,14 @@ describe('Login form [LoginComponent]', () => {
 		})
 	})
 	describe('An invalid user found', () => {
+		let throwErrorcall: any;
+		beforeEach(() => {
+			throwErrorcall = jest.spyOn(component, 'throwError').mockImplementation(() => {});
+		})
 		it('it  should set errors', () => {
-			component.showErrorMessage('some')
-			expect(component.errors).toBe('some');
+			const error = new HttpErrorResponse({ status: 401, url: environment.server });
+			component.loginError(error)
+			expect(throwErrorcall).toBeCalledTimes(1)
 		})
 	})
 })

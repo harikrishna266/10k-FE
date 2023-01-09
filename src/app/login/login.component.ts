@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 		this.userSer.login(this.form.value)
 			.subscribe(
 				(login: loginResponse) => this.validLogin(login),
-				(e) => this.loginError(e)
+				(e: any) => this.loginError(e)
 			);
 	}
 
@@ -64,6 +64,10 @@ export class LoginComponent implements OnInit {
 
 	loginError(e: any) {
 		this.apiInProgress = false;
+		this.throwError(e);
+	}
+
+	throwError(e: any) {
 		throw new HttpErrorResponse(e);
 	}
 }

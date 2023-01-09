@@ -70,7 +70,11 @@ export class RegisterComponent implements OnInit {
 
 	registrationError(error: any) {
 		this.apiInProgress = false;
-		throw new HttpErrorResponse(error);
+		 this.throwError(error);
+	}
+
+	throwError(e: any) {
+		throw new HttpErrorResponse(e);
 	}
 
 }

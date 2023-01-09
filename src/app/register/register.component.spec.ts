@@ -12,6 +12,7 @@ import {ProgressBarComponent} from "../core/shared/progress-bar/progress-bar.com
 import {Router} from "@angular/router";
 import {routes} from "../app-routing.module";
 import {HttpErrorResponse} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 const setFormValid = (form: FormGroup) => {
 	form.patchValue({
@@ -233,10 +234,12 @@ describe('Registration form [RegisterComponent]', () => {
 				let registerApiWithError: any;
 				let form: any;
 				let registrationError: any;
+				let throwErrorCall: any;
 				beforeEach(() => {
 					component.ngOnInit();
 					registerApiWithError = jest.spyOn(userSer, 'register').mockReturnValue(throwError(error));
 					registrationError = jest.spyOn(component, 'registrationError');
+					throwErrorCall = jest.spyOn(component, 'throwError').mockImplementation(() => {});
 					form = component.form
 				});
 				it('it should call registrationError', fakeAsync(() => {
@@ -245,6 +248,11 @@ describe('Registration form [RegisterComponent]', () => {
 					expect(registerApiWithError).toHaveBeenCalledWith(form.value);
 					expect(component.registrationError).toHaveBeenCalledWith(error);
 				}));
+				it('it  should set errors', () => {
+					const error = new HttpErrorResponse({ status: 401, url: environment.server });
+					component.registrationError(error)
+					expect(throwErrorCall).toBeCalledTimes(1)
+				})
 			})
 
 		})
