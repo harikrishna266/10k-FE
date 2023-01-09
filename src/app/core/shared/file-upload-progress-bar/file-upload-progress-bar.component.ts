@@ -23,27 +23,21 @@ export class FileUploadProgressBarComponent implements OnInit {
 
 	progress = 0;
 
-	constructor(public imageSer: ImageService) {
-	}
+	constructor(public imageSer: ImageService) {}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void { }
 
 	uploadFile() {
 		const formData: FormData = new FormData();
 		formData.append('image', this.file.file, this.file.file.name);
 
-
 		this.imageSer.uploadImage(formData)
 			.pipe(
 				map((event: HttpEvent<any>) => this.getEventMessage(event)),
 			)
-			.subscribe(res => {
-
-			});
+			.subscribe(res => {});
 	}
 
-	// {type: 1, loaded: 1050320, total: 1050320}
 	getEventMessage({loaded, total}: any): void {
 		if (loaded && total) {
 			this.progress = Math.round(loaded * 100 / total);
