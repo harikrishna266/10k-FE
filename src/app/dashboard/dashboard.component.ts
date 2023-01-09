@@ -58,6 +58,12 @@ export class DashboardComponent implements AfterViewInit {
 		}
 	}
 
+	updateSearch() {
+		this.queryParams = {...this.resetParams(), search: this.queryParams.search};
+		this.updateParams(this.queryParams);
+		this.updateUrlParams();
+	}
+
 	updateUrlParams() {
 		this.router.navigate(['/dashboard'], {queryParams: this.queryParams});
 	}
