@@ -1,4 +1,4 @@
-import {AfterViewInit, Component,} from '@angular/core';
+import {AfterViewInit, Component, OnInit,} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ImageApi, UserService} from "../core/services/user.service";
 import {debounceTime, map, switchMap, tap} from "rxjs";
@@ -13,7 +13,7 @@ export type Queryparams = { skip: number, limit: number, search: string, id: num
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
 
 	queryParams = {skip: 0, limit: 30, search: '', id: new Date().getTime()}
 	image$!: any;
@@ -28,7 +28,7 @@ export class DashboardComponent implements AfterViewInit {
 		public userSer: UserService) {
 	}
 
-	ngAfterViewInit() {
+	ngOnInit() {
 		this.watchUrlParams();
 	}
 
@@ -44,7 +44,7 @@ export class DashboardComponent implements AfterViewInit {
 				}),
 				tap(() => this.loader = true),
 				debounceTime(300),
-				switchMap((e) => this.searchImage(e))
+				switchMap(() => this.searchImage())
 			)
 	}
 
@@ -80,7 +80,7 @@ export class DashboardComponent implements AfterViewInit {
 	}
 
 
-	searchImage(e: any) {
+	searchImage() {
 		return this.userSer
 			.getUserImages(this.queryParams)
 			.pipe(
@@ -93,8 +93,6 @@ export class DashboardComponent implements AfterViewInit {
 
 	getRandomHeight(images: Image[]) {
 		const classes = ['small' , 'medium' ,'large'];
-
-
 		return images.map(image => {
 			const random = 		Math.floor(Math.random()*3);
 			return {...image, classname: classes[random]}
