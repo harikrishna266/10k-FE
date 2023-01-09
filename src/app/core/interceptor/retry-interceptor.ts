@@ -28,6 +28,7 @@ export class RetryInterceptor implements HttpInterceptor {
 		return next.handle(request)
 			.pipe(
 				catchError((error) => {
+					console.log('on');
 					if (this.ignoreRequest(request.url)) {
 						throw new HttpErrorResponse(error);
 					}
