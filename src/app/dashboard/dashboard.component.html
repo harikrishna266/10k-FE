@@ -9,7 +9,7 @@
 	</div>
 	<ttc-progress-bar *ngIf="loader"></ttc-progress-bar>
 	<div class="dash__photos">
-		<ttc-photo-card class="photo small" [image]="image"
+		<ttc-photo-card class="photo " [ngClass]="image.classname"   [image]="image"
 						*ngFor="let image of this.image$| async "></ttc-photo-card>
 	</div>
 

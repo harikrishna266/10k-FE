@@ -13,10 +13,11 @@
 	height: 100%;
 	padding: 0px;
 	margin: 0px;
+	border: 1px solid var(--border-color);
 
 	&__image {
-		object-fit: contain;
-		width: 100%	;
+ 		width: 100%	;
+		height: 100%;
 		&:hover {
 			opacity: .7;
 		}
@@ -34,14 +35,16 @@
 		border-bottom-right-radius: 16px;
 		display: flex;
 
-		&__buttons {
-			&:first-child {
-				border-right: 1px solid var(--border-color);
-			}
-			width: 50%;
+		span {
+			display: inline-block;
+			width: 100%;
+			white-space: nowrap;
+			overflow: hidden !important;
+			text-overflow: ellipsis;
+			font-size: .8em;
 			text-align: center;
-			line-height: 34px;
-			font-size: 0.8rem;
+			line-height: 33px;
+			margin-left: 10px;
 		}
 	}
 

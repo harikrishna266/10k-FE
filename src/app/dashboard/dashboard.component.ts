@@ -4,6 +4,7 @@ import {ImageApi, UserService} from "../core/services/user.service";
 import {debounceTime, map, switchMap, tap} from "rxjs";
 import {FileUploadComponent} from "../core/shared/file-upload/file-upload.component";
 import {MatDialog} from "@angular/material/dialog";
+import {Image} from "../types/image.type";
 
 export type Queryparams = { skip: number, limit: number, search: string, id: number }
 
@@ -79,8 +80,19 @@ export class DashboardComponent implements AfterViewInit {
 			.pipe(
 				tap((e: ImageApi) => this.updatePagination(e.count)),
 				tap(() => this.loader = false),
-				map((e: ImageApi) => e.images)
+				map((e: ImageApi) => e.images),
+				map((e: Image[]) => this.getRandomHeight(e))
 			)
+	}
+
+	getRandomHeight(images: Image[]) {
+		const classes = ['small' , 'medium' ,'large'];
+
+
+		return images.map(image => {
+			const random = 		Math.floor(Math.random()*3);
+			return {...image, classname: classes[random]}
+		})
 	}
 
 
