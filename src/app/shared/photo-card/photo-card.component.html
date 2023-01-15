@@ -1,5 +1,5 @@
 <div class="card">
-	<img class="card__image" [src]="'http://localhost:3000/'+image.images.link">
+	<img [alt]="image.name" class="card__image" [src]="'http://localhost:3000/'+image.images.link">
 	<div class="card__actions">
 		<span>{{image?.images?.name}}</span>
 	</div>

@@ -1,7 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ErrorComponent} from "./error.component";
 import {FormControl, Validators} from "@angular/forms";
-import {By} from "@angular/platform-browser";
 
 
 describe('ErrorComponent', () => {
