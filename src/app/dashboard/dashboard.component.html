@@ -2,7 +2,7 @@
 	<div class="dash__header">
 		<h1 class="dash__title">Photos</h1>
 		<div class="form-field dash__header__search" >
-			<input [(ngModel)]="queryParams.search" (ngModelChange)="updateSearch()"
+			<input   (keydown)="updateSearch($event)"
 				   class="dash__header__search__input" type="text" placeholder="Search">
 		</div>
 		<button class="dash__add" (click)="openUpload()">+ ADD</button>

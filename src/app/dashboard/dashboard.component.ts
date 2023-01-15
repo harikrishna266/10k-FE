@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit,} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ImageApi, UserService} from "../core/services/user.service";
 import {debounceTime, map, switchMap, tap} from "rxjs";
@@ -58,8 +58,9 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 
-	updateSearch() {
-		this.queryParams = {...this.resetParams(), search: this.queryParams.search};
+	updateSearch(event: KeyboardEvent) {
+		const search = (event.target as HTMLInputElement).value;
+		this.queryParams = {...this.resetParams(), search};
 		this.updateParams(this.queryParams);
 		this.updateUrlParams();
 	}
