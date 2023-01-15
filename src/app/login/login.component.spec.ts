@@ -5,7 +5,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {routes} from "../app-routing.module";
-import {SharedModule} from "../core/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 import {MaterialModule} from "../core/material.module";
 import {By} from "@angular/platform-browser";
 import {of, throwError} from "rxjs";

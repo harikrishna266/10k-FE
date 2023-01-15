@@ -8,8 +8,8 @@ import {AlertComponent} from "./alert/alert.component";
 import {CheckBoxComponent} from "./check-box/check-box.component";
 import {FileUploadProgressBarComponent} from "./file-upload-progress-bar/file-upload-progress-bar.component";
 import {FileUploadComponent} from "./file-upload/file-upload.component";
-import {DirectiveModule} from "../directives/directive.module";
-import {MaterialModule} from "../material.module";
+import {DirectiveModule} from "../core/directives/directive.module";
+import {MaterialModule} from "../core/material.module";
 import {PhotoCardComponent} from "./photo-card/photo-card.component";
 
 const sharedComponents = [

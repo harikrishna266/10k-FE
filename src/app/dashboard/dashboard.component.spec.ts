@@ -1,6 +1,6 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {CommonModule} from "@angular/common";
-import {SharedModule} from "../core/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 import {FormsModule} from "@angular/forms";
 import {ServicesModule} from "../core/services/services.module";
 import {UserService} from "../core/services/user.service";
@@ -11,8 +11,8 @@ import {ActivatedRoute, convertToParamMap, Router} from "@angular/router";
 import {of} from "rxjs";
 import {RunHelpers, TestScheduler} from "rxjs/internal/testing/TestScheduler";
 import {routes} from "../app-routing.module";
-import {FileUploadComponent} from "../core/shared/file-upload/file-upload.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FileUploadComponent} from "../shared/file-upload/file-upload.component";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Image} from "../types/image.type";
 
 
@@ -92,7 +92,6 @@ describe('Dashboard| Dashboard Component', () => {
 		})
 	})
 	describe('Watch for Url changes', () => {
-		let queryParamsMock: any;
 
 		describe('update params', () => {
 			let scheduler: any;
@@ -118,19 +117,20 @@ describe('Dashboard| Dashboard Component', () => {
 					const expectObservable = helpers.expectObservable;
 
 					//@ts-ignore
-					const source$ = cold('(a-b-c|)', activatedRoute.paramMap);
+					 cold('(a-b-c|)', activatedRoute.paramMap);
 
 					const expectedValues = {
 						a: {count: 100, images: [1]},
 						b: {count: 10, images: [1, 2]},
 						c: {count: 10, images: [1, 3]}
 					};
-					// eventhough there are 3 request updating the url params, it wil only fetch 1 results because
+					// even-though there are 3 request updating the url params, it wil only fetch 1 results because
 					// debounce will filter all request and send just 1 image array
 					const expected$ = cold('(a|)', expectedValues);
 
 					component.watchUrlParams();
 					const results$ = component.image$;
+					//@ts-ignore
 					expectObservable(results$).toEqual(expected$);
 				})
 				expect(searchImage).toHaveBeenCalledTimes(1);
@@ -169,12 +169,7 @@ describe('Dashboard| Dashboard Component', () => {
 					inputEle = fixture.debugElement.query(By.css('.dash__header__search__input'))
 				})
 				//i wasn't able to successfully trigger model-change
-				it.skip('should trigger modelChange', fakeAsync(() => {
-					inputEle.nativeElement.value = "search"
-					inputEle.nativeElement.dispatchEvent(new Event('input'));
-					expect(updateSearch).toHaveBeenCalled();
 
-				}))
 				describe('updateSearch should reset skip and params and update search', () => {
 					let updateParams: any;
 					let updateUrlParams: any;
@@ -184,7 +179,7 @@ describe('Dashboard| Dashboard Component', () => {
 						updateParams = jest.spyOn(component, 'updateParams')
 						updateUrlParams = jest.spyOn(component, 'updateUrlParams')
 						resetParams = jest.spyOn(component, 'resetParams')
-						component.updateSearch();
+						component.updateSearch(keyBoardEvent);
 					})
 					it('reset all params except search', () => {
 						expect(component.queryParams).toStrictEqual({
@@ -195,12 +190,12 @@ describe('Dashboard| Dashboard Component', () => {
 						})
 					})
 					it('it should call updateParams', () => {
-						component.updateSearch();
+						component.updateSearch(keyBoardEvent);
 						expect(resetParams).toBeCalled();
 						expect(updateParams).toBeCalledWith({
 							skip: 0,
 							limit: 30,
-							search: 'search',
+							search: 1,
 							id: expect.any(Number)
 						});
 						expect(updateUrlParams).toBeCalled();
@@ -212,8 +207,7 @@ describe('Dashboard| Dashboard Component', () => {
 				let uploadButton: any;
 				let openUpload: any;
 				let open: any;
-				let afterClosed: any;
-				let updateParams: any;
+ 				let updateParams: any;
 				beforeEach(() => {
 					uploadButton = fixture.debugElement.query(By.css('.dash__add'))
 					openUpload = jest.spyOn(component, 'openUpload')
@@ -299,3 +293,6 @@ describe('Dashboard| Dashboard Component', () => {
 	})
 
  });
+
+//@ts-ignore
+const keyBoardEvent = {target: {value: 1}} as KeyboardEvent

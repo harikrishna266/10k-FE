@@ -4,7 +4,7 @@ import {AuthComponent} from './auth.component';
 import {SideBarComponent} from "./side-bar/side-bar.component";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ServicesModule} from "../core/services/services.module";
-import {SharedModule} from "../core/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 import {CommonModule} from "@angular/common";
 
 describe('AuthComponent', () => {

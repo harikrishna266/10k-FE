@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FileHandle} from "../file-upload/file-upload.component";
 import {HttpEvent} from "@angular/common/http";
 import {map} from "rxjs";
-import {ImageService} from "../../services/image.service";
+import {ImageService} from "../../core/services/image.service";
 
 @Component({
 	selector: 'ttc-file-upload-progress-bar',

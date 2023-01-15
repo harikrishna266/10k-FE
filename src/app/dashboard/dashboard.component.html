@@ -2,16 +2,19 @@
 	<div class="dash__header">
 		<h1 class="dash__title">Photos</h1>
 		<div class="form-field dash__header__search" >
-			<input   (keydown)="updateSearch($event)"
+			<input  (keyup)="updateSearch($event)"
 				   class="dash__header__search__input" type="text" placeholder="Search">
 		</div>
 		<button class="dash__add" (click)="openUpload()">+ ADD</button>
 	</div>
 	<ttc-progress-bar *ngIf="loader"></ttc-progress-bar>
-	<div class="dash__photos">
-		<ttc-photo-card class="photo " [ngClass]="image.classname"   [image]="image"
-						*ngFor="let image of this.image$| async "></ttc-photo-card>
-	</div>
+	<ng-container *ngIf=" (this.image$| async) as images">
+		<h2 class="dash__error-message" *ngIf="images.length === 0">No Images found!</h2>
+		<div class="dash__photos">
+
+			 <ttc-photo-card class="photo " *ngFor="let image of images" [ngClass]="'small'"   [image]="image" ></ttc-photo-card>
+		</div>
+	</ng-container>
 
 	<div class="pagination">
 		<div class="pagination__page"
@@ -19,3 +22,8 @@
 			 (click)="goToPage(page)" *ngFor="let page of paginationArray">{{page}}</div>
 	</div>
 </div>
+
+
+<ng-template #loading>
+	<h2>No Images found</h2>
+ </ng-template>

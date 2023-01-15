@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ImageApi, UserService} from "../core/services/user.service";
-import {debounceTime, map, switchMap, tap} from "rxjs";
-import {FileUploadComponent} from "../core/shared/file-upload/file-upload.component";
+import {debounceTime, map, Observable, switchMap, tap} from "rxjs";
+import {FileUploadComponent} from "../shared/file-upload/file-upload.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Image} from "../types/image.type";
 
@@ -11,12 +11,14 @@ export type Queryparams = { skip: number, limit: number, search: string, id: num
 @Component({
 	selector: 'ttc-dashboard',
 	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.scss']
+	styleUrls: ['./dashboard.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class DashboardComponent implements OnInit {
 
 	queryParams = {skip: 0, limit: 30, search: '', id: new Date().getTime()}
-	image$!: any;
+	image$!: Observable<Image[]>;
 	totalImages = 0;
 	paginationArray!: number[];
 	loader!: boolean;
@@ -45,6 +47,17 @@ export class DashboardComponent implements OnInit {
 				tap(() => this.loader = true),
 				debounceTime(300),
 				switchMap(() => this.searchImage())
+			)
+	}
+
+	searchImage() {
+		return this.userSer
+			.getUserImages(this.queryParams)
+			.pipe(
+				tap((e: ImageApi) => this.updatePagination(e.count)),
+				tap(() => this.loader = false),
+				map((e: ImageApi) => e.images),
+				map((e: Image[]) => this.getRandomHeight(e))
 			)
 	}
 
@@ -81,16 +94,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 
-	searchImage() {
-		return this.userSer
-			.getUserImages(this.queryParams)
-			.pipe(
-				tap((e: ImageApi) => this.updatePagination(e.count)),
-				tap(() => this.loader = false),
-				map((e: ImageApi) => e.images),
-				map((e: Image[]) => this.getRandomHeight(e))
-			)
-	}
 
 	getRandomHeight(images: Image[]) {
 		const classes = ['small' , 'medium' ,'large'];

@@ -4,7 +4,7 @@ import {AuthComponent} from './auth.component';
 import {RouterModule} from "@angular/router";
 import {SideBarComponent} from "./side-bar/side-bar.component";
 import {ServicesModule} from "../core/services/services.module";
-import {SharedModule} from "../core/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({

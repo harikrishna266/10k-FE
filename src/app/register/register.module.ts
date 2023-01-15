@@ -4,7 +4,7 @@ import {RegisterComponent} from './register.component';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../core/material.module";
-import {SharedModule} from "../core/shared/shared.module";
+import {SharedModule} from "../shared/shared.module";
 
 const routes: Routes = [
 	{

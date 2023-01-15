@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../core/services/user.service";
 import {StoreService} from "../../core/services/store.service";
-import {ConfirmBoxComponent, ConfirmData} from "../../core/shared/confirm-box/confirm-box.component";
+import {ConfirmBoxComponent, ConfirmData} from "../../shared/confirm-box/confirm-box.component";
 import {MatDialog} from "@angular/material/dialog";
 import {User} from "../../types/user.type";
 

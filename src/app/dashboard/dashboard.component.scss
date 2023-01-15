@@ -13,6 +13,11 @@
 	height: 100%;
 	display: flex;
 
+	&__error-message {
+		text-align: center;
+		margin-top: 100px;
+	}
+
 	&__header {
 		display: flex;
 		flex-direction: row;
