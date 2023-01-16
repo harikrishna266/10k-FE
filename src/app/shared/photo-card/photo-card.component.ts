@@ -5,7 +5,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 	selector: 'ttc-photo-card',
 	templateUrl: './photo-card.component.html',
 	styleUrls: ['./photo-card.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoCardComponent {
 	private _image: any;
@@ -14,7 +13,6 @@ export class PhotoCardComponent {
 	}
 
 	@Input() set image(value: any) {
-		console.log(value.images._id);
 		this._image = value;
 	}
 

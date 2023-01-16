@@ -12,7 +12,6 @@ export type Queryparams = { skip: number, limit: number, search: string, id: num
 	selector: 'ttc-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class DashboardComponent implements OnInit {
@@ -72,6 +71,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	updateSearch(event: KeyboardEvent) {
+		return false;
 		const search = (event.target as HTMLInputElement).value;
 		this.queryParams = {...this.resetParams(), search};
 		this.updateParams(this.queryParams);
