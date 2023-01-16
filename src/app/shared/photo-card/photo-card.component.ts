@@ -8,17 +8,18 @@ import {DomSanitizer} from "@angular/platform-browser";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoCardComponent {
-
-	@Input() image: any;
-	random = Math.floor(Math.random() * 100);
-	classes = ['small', 'medium', 'large'];
-	cardClass = this.classes[0];
-
-	constructor(private _sanitizer: DomSanitizer) {
-		this.cardClass = this.getRandomClass()
+	private _image: any;
+	get image(): any {
+		return this._image;
 	}
 
-	getRandomClass(max = 3): string {
-		return this.classes[Math.floor(Math.random() * max)];
+	@Input() set image(value: any) {
+		console.log(value.images._id);
+		this._image = value;
 	}
+
+
+
+
+
 }

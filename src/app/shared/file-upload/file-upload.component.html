@@ -8,5 +8,8 @@
 		<button class="uploader__click-text" (click)="file.click()">Click Here to Browse</button>
 		<span class="uploader__allowed_formats">*jpeg, png, gif, jpg</span>
 	</div>
-	<ttc-file-upload-progress-bar [file]="file" *ngFor="let file of files"></ttc-file-upload-progress-bar>
+		<div class="uploader__list">
+		<ttc-file-upload-progress-bar [file]="file" *ngFor="let file of files"></ttc-file-upload-progress-bar>
+	</div>
+
 </div>

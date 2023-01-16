@@ -93,6 +93,10 @@ export class DashboardComponent implements OnInit {
 		})
 	}
 
+	getImageId( index: number, image: any) {
+		return image.images._id;
+	}
+
 
 
 	getRandomHeight(images: Image[]) {

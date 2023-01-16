@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed} from "@angular/core/testing";
+import {ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {RegisterComponent} from "./register.component";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
@@ -201,11 +201,11 @@ describe('Registration form [RegisterComponent]', () => {
 			expect(registerApi).not.toHaveBeenCalled();
 		})
 
-		it('SHOULD call register API if form is valid', fakeAsync(() => {
+		it('SHOULD call register API if form is valid', () => {
 			setFormValid(form);
 			component.submit();
-			expect(registerApi).toHaveBeenCalledWith(form.value);
-		}));
+ 			expect(registerApi).toHaveBeenCalledWith(form.value);
+		});
 	})
 
 	describe('AFTER api response', () => {

@@ -8,11 +8,10 @@
 		<button class="dash__add" (click)="openUpload()">+ ADD</button>
 	</div>
 	<ttc-progress-bar *ngIf="loader"></ttc-progress-bar>
-	<ng-container *ngIf=" (this.image$| async) as images">
+	<ng-container *ngIf=" (this.image$ | async) as images">
 		<h2 class="dash__error-message" *ngIf="images.length === 0">No Images found!</h2>
 		<div class="dash__photos">
-
-			 <ttc-photo-card class="photo " *ngFor="let image of images" [ngClass]="'small'"   [image]="image" ></ttc-photo-card>
+			 <ttc-photo-card class="photo " *ngFor="let image of images; trackBy:getImageId" [ngClass]="'large'"   [image]="image" ></ttc-photo-card>
 		</div>
 	</ng-container>
 

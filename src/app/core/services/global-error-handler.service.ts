@@ -1,18 +1,21 @@
-import {ErrorHandler, Injectable} from '@angular/core';
+import {ErrorHandler, Injectable, NgZone} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
 
 export class GlobalErrorHandlerService implements ErrorHandler {
 
-	constructor(public snackbar: MatSnackBar) {
+	constructor(public snackbar: MatSnackBar, private zone: NgZone) {
 	}
 
 	handleError(error: any) {
 		if (error && error.error) {
-			this.snackbar.open(error.error.message, '', {
-				duration: 3000
-			});
+			this.zone.run(() => {
+				const snackBar = this.snackbar.open(error.error.message, 'Dismiss');
+				snackBar.onAction().subscribe(() => {
+					snackBar.dismiss();
+				})
+			})
 		}
 	}
 }

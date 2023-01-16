@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
 	finishedRegistration() {
 		this.apiInProgress = false;
 		this.router.navigate(['/login']);
+		this.throwError({error: {message: 'Please login'}});
 	}
 
 	registrationError(error: any) {

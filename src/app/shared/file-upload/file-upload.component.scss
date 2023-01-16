@@ -10,6 +10,11 @@
 	transition: all ease 500ms;
 	position: relative;
 
+	&__list {
+		overflow: auto;
+		max-height: 400px;
+	}
+
 	&__close {
 		position: absolute;
 		top: -16px;
