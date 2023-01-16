@@ -222,12 +222,12 @@ describe('Registration form [RegisterComponent]', () => {
 				beforeEach(() => {
 					registerApi = jest.spyOn(userSer, 'register').mockReturnValue(of(userResponse));
 				})
-				it('it should navigate  to  login page', fakeAsync(() => {
+				it('it should navigate  to  login page', () => {
 					setFormValid(form);
 					component.submit();
 					expect(finishedRegistration).toHaveBeenCalledWith();
 					expect(routerSpy).toHaveBeenCalledWith(['/login'])
-				}));
+				});
 			})
 
 			describe('ERROR', () => {

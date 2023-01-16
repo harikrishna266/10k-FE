@@ -72,7 +72,6 @@ describe('Retry Refresh Token ]', () => {
 			retry.intercept(request, next);
 
 			expect(next.handle).toHaveBeenCalledTimes(1);
-			// expect(ignoreRequest).toHaveBeenCalledTimes(1);
 		})
 
 	})
